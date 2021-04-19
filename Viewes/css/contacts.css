@@ -1,0 +1,51 @@
+*,
+*::before,
+*::after {
+	margin: 0px;
+	padding: 0px;
+	box-sizing: border-box;
+}
+
+:root {
+	--white: #fefcfb;
+	--midnight: #225560;
+	--black: #090909;
+	--red: #8b0000;
+	--kepel: #2EBFA5;
+	--icterine: #EDF060;
+	--spanish: #767522;
+	--font-size-regular: 15px;
+	--font-size-large: 18px;
+	--font-size-menu: 25px;
+	--font-size-logo: 40px;
+}
+
+body {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	margin: auto;
+}
+
+.content {
+    margin-top: 3%;
+}
+
+p {
+    text-align: center;
+}
+
+.text1 {
+    font-size: var(--font-size-menu);
+    color: var(--midnight);
+    letter-spacing: 1px;
+}
+
+.text2 {
+    margin-top: 2%;
+    font-size: var(--font-size-large);
+    line-height: 1.5;
+    color: var(--kepel);
+    letter-spacing: 1px;
+    
+}

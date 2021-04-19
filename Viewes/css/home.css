@@ -1,0 +1,57 @@
+*,
+*::before,
+*::after {
+	margin: 0px;
+	padding: 0px;
+	box-sizing: border-box;
+}
+
+:root {
+	--white: #fefcfb;
+	--midnight: #225560;
+	--black: #090909;
+	--red: #8b0000;
+	--kepel: #2EBFA5;
+	--icterine: #EDF060;
+	--spanish: #767522;
+	--font-size-regular: 15px;
+	--font-size-large: 18px;
+	--font-size-menu: 25px;
+	--font-size-logo: 40px;
+	--font-size-bachata: 50px;
+}
+
+body {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	margin: auto;
+}
+
+p {
+    color: var(--black);
+    text-align: center;
+    font-size: var(--font-size-bachata);
+    margin: 23%;
+    font-style: italic;
+}
+
+img {
+    float: right;
+}
+
+.style-container {
+    display: flex;
+    width: 100%;
+}
+
+.style-img {
+    object-fit: cover;
+    width: 50vw;
+    flex-shrink: 0;
+}
+
+.half {
+    width: 50vw;
+    flex-shrink: 0;
+}
