@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Register</title>
+    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" href="./css/formlogreg.css" />
+</head>
+<body>
+<div class="content">
+    <div class="card-form">
+        <h1 class="horizontal-align">Register</h1>
+        <br>
+        <p class="horizontal-align">Please fill in this form to create an account:</p>
+        <form class="form-container" action="register.html" method="post">
+            
+            <label class=""for="fullname">Full Name</label>
+            <input type="text" placeholder="Full Name" name="fullname" required>
+            <br>
+            <label for="email">Email:</label>
+            <input type="text" placeholder="Enter Email" name="email" required>
+            <br>
+            <label for="password">Password</label>
+            <input type="password" placeholder="Enter password" name="password" required>
+            <br>
+            <label for="confirm-password">Confirm password</label>
+            <input type="password" placeholder="Confirm password" name="confirm-password" required>
+            <br>
+            <button  type="submit" class="button-reg">Register</button>
+        </form>
+        <div class="container-signin">
+            <p class="horizontal-align">Already have an account?<a href="login.html"> Sing in</a></p>
+        </div>
+    </div>
+</div>
+</body>
+</html>

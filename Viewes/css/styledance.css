@@ -1,0 +1,12 @@
+h1 {
+    text-align: center;
+    margin-top: 20%;
+    color: var(--kepel);
+}
+
+p {
+    text-align: justify;
+    padding: 5%;
+    color: var(--black);
+    font-weight: 400;
+}
