@@ -1,0 +1,76 @@
+.look-calendar {
+    width: 1200px;
+    min-height: 100%;
+    padding: 2%;
+    margin: auto;
+}
+.switch-month {
+    display: flex;
+}
+.prev, .next {
+    background-color: var(--midnight);
+    color: var(--white);
+    border-radius: 0;
+    font-size: var(--font-size-menu);
+    width: 50px;
+    max-height: 100%;
+    float: left;
+}
+
+.month {
+  display: flex;
+}
+
+.calendar {
+    width: 100%;
+    font-size: var(--font-size-menu);
+    text-align: center;
+    border-spacing: 0px;
+    table-layout: fixed; 
+}
+
+th, td {
+    border: 1px solid gray;
+}
+
+td {
+    height: 120px;
+    font-size: var(--font-size-regular);
+    vertical-align: top;
+}
+
+.calendar tbody td.today {
+    background: var(--icterine);
+}
+
+td > .day-number {
+    display: flex;
+    flex-direction: row-reverse;
+    margin: 2px;
+}
+
+.event {
+    padding-left: 2px;
+    width: 100%;
+    text-align: left;
+    height: 20px;
+}
+
+.event:hover {
+    cursor: pointer;
+    background-color: var(--midnight);
+    color: var(--white);
+    font-weight: 700;
+}
+
+.actions {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1%;
+}
+
+.add {
+    border-radius: 0;
+    background-color: var(--midnight);
+    color: var(--white);
+}
