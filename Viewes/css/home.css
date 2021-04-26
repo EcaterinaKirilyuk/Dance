@@ -16,13 +16,16 @@ img {
 .half {
     width: 50vw;
     flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .stilitanti {
     font-size: var(--font-size-stilitanti);
-    color: var(--black);
-    text-align: center;
-    margin: 23%;
+    color: var(--midnight);
+    display: flex;
+    justify-content: center;
     font-style: italic;
+    cursor: pointer;
 }
-

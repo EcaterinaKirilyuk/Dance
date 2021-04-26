@@ -3,27 +3,37 @@
     <head>
         <meta charset="utf-8"> 
         <link rel="stylesheet" href="./css/style.css" />
-        <script src="/Viewes/js/page-switcher.js"></script>
+        <script defer src="/Viewes/js/page-switcher.js"></script>
         <script defer src="/Viewes/js/test.js"></script>
     </head>
     <body>
         <div class="extra">
             <p class="space">+373 (68) 280 280</p>
             <div>
-                <button class="space">Login</button>
-                <button class="space">Register</button>
+                <button class="space">
+                    <a href="/Viewes/login.html">Login</a>
+                </button>
+                <button class="space">
+                    <a href="/Viewes/register.html">Register</a>
+                </button>
+                <button id="logout" class="space">
+                    Logout
+                </button>
+                <button id="calendar-page-button" class="space">
+                    Calendar
+                </button>
             </div>
         </div>
         <div class="nav-menu">
-                <a href="layout.html" class="logo">Dance</a>
+                <a id="home-page-button" class="logo">Dance</a>
                 <ul>
-                    <li>Bachata</li>
-                    <li>Kizomba</li>
-                    <li>Salsa</li>
-                    <li onclick="load_contacts()">Contacts</li>
+                    <li id="bachata-page-button">Bachata</li>
+                    <li id="kizomba-page-button">Kizomba</li>
+                    <li id="salsa-page-button">Salsa</li>
+                    <li id="contacts-page-button">Contacts</li>
                 </ul>
             </div>
-        <div id="content">
+        <div class="content">
 
         </div>
         <div id="footer">

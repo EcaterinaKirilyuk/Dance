@@ -12,11 +12,13 @@
 	--black: #090909;
 	--kepel: #2EBFA5;
 	--kepel-glassy: rgba(46, 191, 165, 0.1);
+	--black-glassy: rgba(0, 0, 0, 0.7);
 	--icterine: #EDF060;
 	--spanish: #767522;
 	--grey: #c0c0c0;
 	--font-size-regular: 15px;
 	--font-size-large: 18px;
+	--font-size-add: 20px;
 	--font-size-menu: 25px;
 	--font-size-logo: 40px;
 	--font-size-stilitanti: 60px;
@@ -29,6 +31,12 @@ body {
 	flex-direction: column;
 	width: 100%;
 	margin: auto;
+}
+
+.content {
+	overflow: hidden;
+	display: flex;
+	flex-direction: column;
 }
 
 .extra {
@@ -53,10 +61,15 @@ button {
 	width: 130px;
 	border-radius: 20px;
 	border-style: none;
-	color: var(--midnight);
 	letter-spacing: 1px;
 	text-transform: uppercase;
 	cursor:pointer;
+	color: var(--midnight);
+}
+
+a {
+	text-decoration: none;
+	color: var(--midnight);
 }
 
 .space {
@@ -95,6 +108,7 @@ li:hover {
 	color: var(--white);
 	margin-left: 3%;
 	font-style: italic;
+	cursor: pointer;
 }
 
 a:hover {
@@ -104,7 +118,11 @@ a:hover {
 #footer {
 	background-color: #225560;
 	height: 50px;
-	text-align: center;
-    padding-top: 1%;
+	display: flex;
 	color: var(--white);
+	position: fixed;
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	bottom: 0;
 }

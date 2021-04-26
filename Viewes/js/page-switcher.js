@@ -1,9 +1,12 @@
-function load_html(page) {
-    var con = document.getElementById('content');
+function loadHtml(page, loadAfter) {
+    var con = document.querySelector('div.content');
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function() {
         if(xhr.readyState == 4 && xhr.status == 200) {
             con.innerHTML = xhr.responseText;
+            if(typeof loadAfter === "function") {
+                loadAfter();
+            }
         }
     }
 
@@ -12,13 +15,58 @@ function load_html(page) {
     xhr.send();
 }
 
-function load_js(fileName) {
+function loadJs(fileName) {
     var script = document.createElement("script");
     script.src = `http://${document.location.host}/Viewes/js/${fileName}.js`;
     document.head.appendChild(script);
 }
 
-function load_contacts() {
-    load_html("contacts");
-    // load_js("contacts");
+/**
+ * 
+ * @param {string} elementId 
+ * @param {function} loadFunction Loads HTML and JS
+ */
+function loadButton(elementId, loadFunction) {
+    const button = document.getElementById(elementId);
+    button.addEventListener("click", loadFunction);
 }
+
+function loadContacts() {
+    loadHtml("contacts");
+    // loadJs("contacts");
+}
+
+function loadSalsa() {
+    loadHtml("salsa");
+}
+
+function loadKizomba() {
+    loadHtml("kizomba");
+}
+
+function loadBachata() {
+    loadHtml("bachata");
+    loadJs("modal");
+}
+
+function loadHome() {
+    loadHtml("home", connectJsToHome);
+}
+
+function loadCalendar() {
+    loadHtml("calendar");
+}
+
+function connectJsToHome() {
+    loadButton("bachata-about-page", loadBachata);
+    loadButton("kizomba-about-page", loadKizomba);
+    loadButton("salsa-about-page", loadSalsa);
+}
+
+
+loadButton("calendar-page-button", loadCalendar);
+loadButton("home-page-button", loadHome);
+loadButton("bachata-page-button", loadBachata);
+loadButton("kizomba-page-button", loadKizomba);
+loadButton("salsa-page-button", loadSalsa);
+loadButton("contacts-page-button", loadContacts);
