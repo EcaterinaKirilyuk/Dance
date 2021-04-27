@@ -16,6 +16,7 @@
 	--icterine: #EDF060;
 	--spanish: #767522;
 	--grey: #c0c0c0;
+	--grey-lights-button: #F5F5F5;
 	--font-size-regular: 15px;
 	--font-size-large: 18px;
 	--font-size-add: 20px;
@@ -37,6 +38,7 @@ body {
 	overflow: hidden;
 	display: flex;
 	flex-direction: column;
+	min-height: 77vh;
 }
 
 .extra {
@@ -44,8 +46,16 @@ body {
 	width: 100%;
 	display: flex;
 	justify-content: space-between;
-	padding: 1%;
 	color: var(--white);
+	height: 9vh;
+}
+
+.buttons {
+	display: flex;
+	align-items: center;
+	align-self: center;
+	justify-content: space-between;
+	height: 5vh;
 }
 
 p {
@@ -117,12 +127,13 @@ a:hover {
 
 #footer {
 	background-color: #225560;
-	height: 50px;
+	height: 5vh;
+	min-height: 30px;
 	display: flex;
 	color: var(--white);
-	position: fixed;
 	margin: 0;
 	padding: 0;
 	width: 100%;
 	bottom: 0;
+
 }

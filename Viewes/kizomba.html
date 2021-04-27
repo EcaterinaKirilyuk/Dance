@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <title>Kizomba</title>
     <link rel="stylesheet" href="./css/styledance.css" />
+    <link rel="stylesheet" href="./css/modal.css" />
 </head>
 <body>
 <div class="about">
@@ -17,6 +18,27 @@
         </p>
     </div>
 </div>
-<button class="addnew">Add new photo/video</button>
+<button id="addnew">Add new photo/video</button>
+<div id="myModal" class="modal">
+    <!-- Modal content -->
+    <div class="modal-content">
+        <div class="modal-header">
+            <h1>Add</h1>
+            <span class="close">&times;</span>
+        </div>
+        <div class="modal-body">
+            <form action="" method="post">
+                <label id="yourBtn">Upload</label>
+                <input id="file-name" type="text" placeholder="Choose file" readonly>
+                <div style='height: 0px;width: 0px; overflow:hidden;'><input id="upfile" type="file" value="upload"/></div>
+                <label for="comment">Comment</label>
+                <textarea placeholder="Write comment" readonly name="comment"></textarea>
+                <button type="submit" class="save" id="save">
+                    <a>Save</a>
+                </button>
+            </form>
+        </div>
+    </div>
+    </div>
 </body>
 </html>

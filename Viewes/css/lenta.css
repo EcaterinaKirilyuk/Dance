@@ -1,0 +1,12 @@
+.lenta {
+    display: flex;
+    align-self: center;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.lenta-block {
+    display: flex;
+    flex-direction: column;
+}
+

@@ -38,15 +38,20 @@ function loadContacts() {
 
 function loadSalsa() {
     loadHtml("salsa");
+    loadJs("modal");
+    loadJs("file-input");
 }
 
 function loadKizomba() {
     loadHtml("kizomba");
+    loadJs("modal");
+    loadJs("file-input");
 }
 
 function loadBachata() {
     loadHtml("bachata");
     loadJs("modal");
+    loadJs("file-input");
 }
 
 function loadHome() {
