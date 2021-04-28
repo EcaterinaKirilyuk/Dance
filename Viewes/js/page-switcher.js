@@ -58,20 +58,21 @@ function loadHome() {
     loadHtml("home", connectJsToHome);
 }
 
-function loadCalendar() {
-    loadHtml("calendar");
-}
-
 function connectJsToHome() {
     loadButton("bachata-about-page", loadBachata);
     loadButton("kizomba-about-page", loadKizomba);
     loadButton("salsa-about-page", loadSalsa);
 }
 
+function loadCalendar() {
+    loadHtml("calendar");
+    loadJs("modify-calendar");
 
-loadButton("calendar-page-button", loadCalendar);
+}
+
 loadButton("home-page-button", loadHome);
 loadButton("bachata-page-button", loadBachata);
 loadButton("kizomba-page-button", loadKizomba);
 loadButton("salsa-page-button", loadSalsa);
 loadButton("contacts-page-button", loadContacts);
+loadButton("calendar-page-button", loadCalendar);

@@ -3,10 +3,40 @@
     align-self: center;
     flex-wrap: wrap;
     justify-content: center;
+    border-color: var(--midnight);
+    border-width: 1px;
+    border-style: solid;
+    width: 53vw;
+    min-width: 600px;
+    margin: 2%;
 }
 
 .lenta-block {
     display: flex;
     flex-direction: column;
+    border-color: var(--midnight);
+    border-width: 1px;
+    border-style: solid;
+    margin: 2%;
+    width: 96%;
 }
 
+img, video {
+	width: 100%;
+}
+
+.comment {
+    text-align: right;
+}
+
+.date > p, .comment > p {
+    padding: 2%;
+    color: var(--midnight);
+    font-size: var(--font-size-menu);
+}
+
+.addnew {
+    display: flex;
+    align-items: center;
+    margin-top: 2%;
+}
