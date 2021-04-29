@@ -10,14 +10,14 @@ function loadHtml(page, loadAfter) {
         }
     }
 
-    xhr.open("GET",`http://${document.location.host}/Viewes/${page}.html`, true);
+    xhr.open("GET",`http://${document.location.host}/viewes/${page}.html`, true);
     xhr.setRequestHeader('Content-type', 'text/html');
     xhr.send();
 }
 
 function loadJs(fileName) {
     var script = document.createElement("script");
-    script.src = `http://${document.location.host}/Viewes/js/${fileName}.js`;
+    script.src = `http://${document.location.host}/viewes/js/${fileName}.js`;
     document.head.appendChild(script);
 }
 
@@ -67,7 +67,7 @@ function connectJsToHome() {
 function loadCalendar() {
     loadHtml("calendar");
     loadJs("modify-calendar");
-
+    loadJs("delete-modify");
 }
 
 loadButton("home-page-button", loadHome);

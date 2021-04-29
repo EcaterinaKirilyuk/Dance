@@ -21,6 +21,7 @@
 	--font-size-large: 18px;
 	--font-size-add: 20px;
 	--font-size-menu: 25px;
+	--font-size-media: 30px;
 	--font-size-logo: 40px;
 	--font-size-stilitanti: 60px;
 
@@ -58,7 +59,7 @@ body {
 	height: 5vh;
 }
 
-p {
+.text-footer, .text-number {
     font-size: var(--font-size-large);
 	margin: auto;
 }
@@ -135,5 +136,4 @@ a:hover {
 	padding: 0;
 	width: 100%;
 	bottom: 0;
-
 }

@@ -309,7 +309,7 @@
     <div class="modal-content">
         <div class="modal-header">
             <h1>Add</h1>
-            <span class="close">&times;</span>
+            <span id="add-close" class="close">&times;</span>
         </div>
         <div class="modal-body">
             <form action="" method="post">
@@ -327,6 +327,31 @@
             </form>
         </div>
     </div>
+</div>
+
+<div id="DeleteModal" class="modal">
+    <!-- Modal content -->
+    <div class="modal-content">
+        <div class="modal-header">
+            <h1>Delete</h1>
+            <span id="delete-close" class="close">&times;</span>
+        </div>
+        <div class="modal-body">
+            <form action="" method="post">
+                <label class="" for="date">Date</label>
+                <input type="date" placeholder="Date" name="date">
+
+                <label class="" for="time">Time</label>
+                <input type="time" placeholder="Time" name="time">
+
+                <label class="" for="time">Style</label>
+                <input type="text" placeholder="Style" name="style">
+                <button type="submit" class="save" id="save">
+                    <a>Save</a>
+                </button>
+            </form>
+        </div>
     </div>
+</div>
 </body>
 </html>
