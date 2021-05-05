@@ -18,8 +18,8 @@ class Users {
         return DBController::execute($query);
     }
 
-    public function select () {
-        $query="SELECT count(*) FROM $this->table";
+    public function select ($id) {
+        $query="SELECT * FROM $this->table WHERE id=$id";
         return DBController::execute($query);
     }
 
@@ -36,11 +36,11 @@ class Users {
         }
 
         if($password != NULL) {
-            $set = $set . 'password=' . "'" . $password . "'";
+            $set = $set . 'password=' . "'" . $password . "'" . ', ';
         }
-
         
-
+        $set = trim($set, " ,");
+        
         $query="UPDATE $this->table SET $set WHERE id=$id";
         var_dump($query);
         var_dump("UPDATE users SET fullname='Alex', email='ale345x@mail.ru' WHERE id=1");
@@ -61,13 +61,17 @@ class Users {
 // $response=$users->select();
 // var_dump($response);
 
-$users=new Users();
-$response=$users->update(1, 'Alex', 'ale345x@mail.ru');
+// $users=new Users();
+// $response=$users->update(1, 'Alex', 'ale345x@mail.ru');
 // var_dump($response);
 
 // $users=new Users();
-// $response=$users->delete(5);
+// $response=$users->delete(4);
 // var_dump($response);
+
+$users=new Users();
+$response=$users->select(3);
+var_dump($response);
 
 /*
 
