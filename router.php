@@ -20,8 +20,22 @@ function put(string $path, string $controller, string $function) {
     }
 }
 
+function post(string $path, string $controller, string $function) {
+    $data=array_merge($_REQUEST, $_FILES);
+    var_dump($data);
+    if($_SERVER['REQUEST_METHOD'] === 'POST'&& $path === $_SERVER['PATH_INFO']) {
+        call($controller, $function, $data);
+    }
+}
 
 
 
 
 get("/login", "UserController", "login");
+get("/hello", "TestController", "hello");
+get("/fruits", "TestController", "list");
+get("/goodbye", "TestController", "goodbye");
+get("/goodnight", "TestController", "goodnight");
+get("/byebye", "TestController", "byebye");
+get("/musia", "TestController", "pusea");
+post("/hello", "TestController", "hello");

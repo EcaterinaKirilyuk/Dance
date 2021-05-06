@@ -3,6 +3,6 @@
 class UserController {
     
     function login() {
-        echo "Hello, Alex!";
+        echo "Hello, Kate!";
     }
 }
