@@ -28,7 +28,12 @@ function post(string $path, string $controller, string $function) {
     }
 }
 
-
+function del(string $path, string $controller, string $function) {
+    $data=$_REQUEST;
+    if($_SERVER['REQUEST_METHOD'] === 'DELETE' && $path === $_SERVER['PATH_INFO']) {
+        call($controller, $function, $data);
+    }
+}
 
 
 get("/login", "UserController", "login");
@@ -39,3 +44,4 @@ get("/goodnight", "TestController", "goodnight");
 get("/byebye", "TestController", "byebye");
 get("/musia", "TestController", "pusea");
 post("/hello", "TestController", "hello");
+del("/fruits", "TestController", "list");
