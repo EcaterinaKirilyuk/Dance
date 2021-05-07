@@ -1,25 +1,22 @@
 <?php
 
-use Users as GlobalUsers;
-
 require(__DIR__ . '/../controllers/DBController.php');
 
 class Users {
     private $table="users";
-    private $id;
-    private $fullname;
-    private $email;
-    private $pasword;
-    private $type;
-    private $datetime;
    
     public function insert (string $fullname, string $email, string $password) {
         $query="INSERT INTO $this->table VALUES(NULL, '$fullname', '$email', '$password', 'CLIENT', NOW())";
         return DBController::execute($query);
     }
 
-    public function select ($id) {
+    public function select (int $id) {
         $query="SELECT * FROM $this->table WHERE id=$id";
+        return DBController::execute($query);
+    }
+
+    public function selectByEmail ( string $email) {
+        $query="SELECT * FROM $this->table WHERE email='$email'";
         return DBController::execute($query);
     }
 
@@ -42,8 +39,8 @@ class Users {
         $set = trim($set, " ,");
         
         $query="UPDATE $this->table SET $set WHERE id=$id";
-        var_dump($query);
-        var_dump("UPDATE users SET fullname='Alex', email='ale345x@mail.ru' WHERE id=1");
+        // var_dump($query);
+        // var_dump("UPDATE users SET fullname='Alex', email='ale345x@mail.ru' WHERE id=1");
         return DBController::execute($query);
     }
 
@@ -69,9 +66,9 @@ class Users {
 // $response=$users->delete(4);
 // var_dump($response);
 
-$users=new Users();
-$response=$users->select(3);
-var_dump($response);
+// $users=new Users();
+// $response=$users->select(3);
+// var_dump($response);
 
 /*
 

@@ -1,5 +1,7 @@
 <?php
 
+require_once(__DIR__ . '/helpers/helpers.php');
+
 function call(string $controller, string $function, array $data) {
     require_once(dirname(__FILE__) . "/controllers/{$controller}.php");
     $instance = new $controller();
@@ -22,7 +24,6 @@ function put(string $path, string $controller, string $function) {
 
 function post(string $path, string $controller, string $function) {
     $data=array_merge($_REQUEST, $_FILES);
-    var_dump($data);
     if($_SERVER['REQUEST_METHOD'] === 'POST'&& $path === $_SERVER['PATH_INFO']) {
         call($controller, $function, $data);
     }
@@ -37,11 +38,16 @@ function del(string $path, string $controller, string $function) {
 
 
 get("/login", "UserController", "login");
+post("/register", "UserController", "register");
+
+
+
+
 get("/hello", "TestController", "hello");
 get("/fruits", "TestController", "list");
 get("/goodbye", "TestController", "goodbye");
 get("/goodnight", "TestController", "goodnight");
 get("/byebye", "TestController", "byebye");
 get("/musia", "TestController", "pusea");
-post("/hello", "TestController", "hello");
 del("/fruits", "TestController", "list");
+
