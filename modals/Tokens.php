@@ -33,6 +33,6 @@ class Tokens {
 // $response=$tokens->selectbyUserId(2);
 // var_dump($response);
 
-$tokens=new Tokens();
-$response=$tokens->deletedbyUserId(2);
-var_dump($response);
+// $tokens=new Tokens();
+// $response=$tokens->deletedbyUserId(2);
+// var_dump($response);

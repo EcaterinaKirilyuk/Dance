@@ -55,7 +55,7 @@ class Users {
 // var_dump($response);
 
 // $users=new Users();
-// $response=$users->select();
+// $response=$users->selectByEmail('alex1@mail.ru');
 // var_dump($response);
 
 // $users=new Users();
