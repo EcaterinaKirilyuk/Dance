@@ -8,7 +8,7 @@ function randomString () {
     $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
     $token = '';
     for ($i = 0; $i < 64; $i++) {
-        $token = $characters[rand(0, strlen($characters))];
+        $token .= $characters[rand(0, strlen($characters)-1)];
     }
     return $token;
 }

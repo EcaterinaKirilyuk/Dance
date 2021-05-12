@@ -9,7 +9,7 @@ function call(string $controller, string $function, array $data) {
 }
 
 function get(string $path, string $controller, string $function) {
-    $data = $_REQUEST;
+    $data = $_GET;
     if($_SERVER['REQUEST_METHOD'] === 'GET' && $path === $_SERVER['PATH_INFO']) {
         call($controller, $function, $data);
     }
@@ -23,22 +23,25 @@ function put(string $path, string $controller, string $function) {
 }
 
 function post(string $path, string $controller, string $function) {
-    $data=array_merge($_REQUEST, $_FILES);
-    if($_SERVER['REQUEST_METHOD'] === 'POST'&& $path === $_SERVER['PATH_INFO']) {
+    $data=array_merge($_POST, $_FILES);
+    if($_SERVER['REQUEST_METHOD'] === 'POST' && $path === $_SERVER['PATH_INFO']) {
         call($controller, $function, $data);
     }
 }
 
 function del(string $path, string $controller, string $function) {
-    $data=$_REQUEST;
+    $data=$_GET;
     if($_SERVER['REQUEST_METHOD'] === 'DELETE' && $path === $_SERVER['PATH_INFO']) {
         call($controller, $function, $data);
     }
 }
 
 
-get("/login", "UserController", "login");
+post("/login", "UserController", "login");
 post("/register", "UserController", "register");
+del("/logout", "UserController", "logout");
+get("/calendar", "TestController", "getCalendar");
+
 
 
 

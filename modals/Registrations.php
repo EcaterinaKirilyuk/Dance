@@ -1,6 +1,6 @@
 <?php
 
-require(__DIR__ . '/../controllers/DBController.php');
+require_once(__DIR__ . '/../controllers/DBController.php');
 
 class Registrations {
     private $table="registrations";

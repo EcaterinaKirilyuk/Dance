@@ -1,5 +1,7 @@
 <?php 
 
+require_once(__DIR__ . './UserController.php');
+
 class TestController {
 
     function hello($data) {
@@ -25,5 +27,14 @@ class TestController {
 
     function pusea() {
         echo "sweety pusea";
+    }
+
+    function getCalendar(array $data) {
+        UserController::isLoggedIn($data['token']);
+        // logic
+        response([
+            'message' => 'OK',
+            'success' => true
+        ]);
     }
 }

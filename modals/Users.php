@@ -1,6 +1,6 @@
 <?php
 
-require(__DIR__ . '/../controllers/DBController.php');
+require_once(__DIR__ . '/../controllers/DBController.php');
 
 class Users {
     private $table="users";
@@ -63,7 +63,7 @@ class Users {
 // var_dump($response);
 
 // $users=new Users();
-// $response=$users->delete(4);
+// $response=$users->delete();
 // var_dump($response);
 
 // $users=new Users();

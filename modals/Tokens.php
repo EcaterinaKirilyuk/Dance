@@ -1,6 +1,6 @@
 <?php
 
-require(__DIR__ . '/../controllers/DBController.php');
+require_once(__DIR__ . '/../controllers/DBController.php');
 
 class Tokens {
     private $table="tokens";
@@ -11,12 +11,17 @@ class Tokens {
     }
 
     public function selectbyUserId (int $user_id) {
-        $query="SELECT * FROM $this->table WHERE id=$user_id";
+        $query="SELECT * FROM $this->table WHERE user_id=$user_id";
         return DBController::execute($query);
     }
 
-    public function deletedbyUserId(int $user_id) {
-        $query = "DELETE FROM $this->table WHERE id=$user_id";
+    public function selectbyToken (string $token) {
+        $query="SELECT * FROM $this->table WHERE token='$token'";
+        return DBController::execute($query);
+    }
+
+    public function deletebyUserId(int $user_id) {
+        $query = "DELETE FROM $this->table WHERE user_id=$user_id";
         return DBController::execute($query);
     }
 }
@@ -35,4 +40,8 @@ class Tokens {
 
 // $tokens=new Tokens();
 // $response=$tokens->deletedbyUserId(2);
+// var_dump($response);
+
+// $tokens=new Tokens();
+// $response=$tokens->selectbyToken('as');
 // var_dump($response);
