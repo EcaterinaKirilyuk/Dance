@@ -4,12 +4,6 @@ require_once(__DIR__ . '/../controllers/DBController.php');
 
 class Posts {
     private $table="posts";
-    private $id;
-    private $comment;
-    private $datetime;
-    private $link;
-    private $file_type;
-    private $style;
 
     public function insert(string $comment, string $link, string $file_type, string $style) {
         $query="INSERT INTO $this->table VALUES(NULL, '$comment',  NOW(), '$link', '$file_type', '$style')";
@@ -18,6 +12,11 @@ class Posts {
 
     public function select(int $id) {
         $query="SELECT * FROM $this->table WHERE id=$id";
+        return DBController::execute($query);
+    }
+
+    public function selectList( int $rows, int $from) {
+        $query="SELECT * FROM $this->table ORDER BY id DESC LIMIT $rows OFFSET $from";
         return DBController::execute($query);
     }
 
@@ -69,7 +68,7 @@ class Posts {
 // $response=$posts->update(1, NULL, 'videobachata.com');
 // var_dump($response);
 
-$posts=new Posts();
-$response=$posts->delete(12);
-$response=$posts->delete(11);
-var_dump($response);
+// $posts=new Posts();
+// $response=$posts->delete(12);
+// $response=$posts->delete(11);
+// var_dump($response);

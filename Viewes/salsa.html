@@ -71,9 +71,10 @@
                 <form action="" method="post">
                     <label id="yourBtn">Upload</label>
                     <input id="file-name" type="text" placeholder="Choose file" readonly>
-                    <div style='height: 0px;width: 0px; overflow:hidden;'><input id="upfile" type="file" value="upload"/></div>
+                    <div style='height: 0px;width: 0px; overflow:hidden;'><input id="upfile" type="file" value="upload"  accept="video/*,image/*" required/></div>
                     <label for="comment">Comment</label>
-                    <textarea placeholder="Write comment" readonly name="comment"></textarea>
+                    <textarea placeholder="Write comment" name="comment"></textarea>
+                    <input name="style" type="text" value="salsa" hidden readonly>
                     <button type="submit" class="save" id="save">
                         <a>Save</a>
                     </button>

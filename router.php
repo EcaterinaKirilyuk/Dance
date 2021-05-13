@@ -41,6 +41,8 @@ post("/login", "UserController", "login");
 post("/register", "UserController", "register");
 del("/logout", "UserController", "logout");
 get("/calendar", "TestController", "getCalendar");
+post("/post", "PostController", "create");
+get("/post", "PostController", "index");
 
 
 
