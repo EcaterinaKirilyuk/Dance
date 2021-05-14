@@ -43,6 +43,12 @@ del("/logout", "UserController", "logout");
 get("/calendar", "TestController", "getCalendar");
 post("/post", "PostController", "create");
 get("/post", "PostController", "index");
+del("/post", "PostController", "delete");
+post("/calendar/training", "CalendarController", "createTraining");
+get("/calendar/training/list", "CalendarController", "listTrainings");
+del("/calendar/training", "CalendarController", "deleteTraining");
+
+
 
 
 

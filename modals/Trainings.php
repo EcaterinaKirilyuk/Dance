@@ -4,9 +4,6 @@ require_once(__DIR__ . '/../controllers/DBController.php');
 
 class Trainings {
     private $table="trainings";
-    private $id;
-    private $datetime;
-    private $style;
 
     public function insert(string $datetime, string $style) {
         $query="INSERT INTO $this->table VALUES(NULL, '$datetime', '$style')";
@@ -15,6 +12,11 @@ class Trainings {
 
     public function select(int $id) {
         $query="SELECT * FROM $this->table WHERE id=$id";
+        return DBController::execute($query);
+    }
+
+    public function selectByDatetime(int $month, int $year) {
+        $query="SELECT * FROM  $this->table WHERE MONTH(datetime)=$month AND YEAR(datetime)=$year";
         return DBController::execute($query);
     }
 
@@ -32,7 +34,6 @@ class Trainings {
         $set = trim($set, " ,");
 
         $query="UPDATE $this->table SET $set WHERE id=$id";
-        var_dump($query);
         return DBController::execute($query);
     }
 
@@ -54,9 +55,9 @@ class Trainings {
 // $response=$trainings->select(7);
 // var_dump($response);
 
-$trainings=new Trainings();
-$response=$trainings->update(3, NULL, 'KIZOMBA');
-var_dump($response);
+// $trainings=new Trainings();
+// $response=$trainings->update(3, NULL, 'KIZOMBA');
+// var_dump($response);
 
 // $trainings=new Trainings();
 // $response=$trainings->delete(7);

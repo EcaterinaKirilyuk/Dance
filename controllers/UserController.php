@@ -98,8 +98,7 @@ class UserController {
                 'success' => false
             ]);
         }
-
-        
+        return $response[0]['user_id'];
     }
 
 }
