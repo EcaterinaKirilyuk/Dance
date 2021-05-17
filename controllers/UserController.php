@@ -9,7 +9,10 @@ class UserController {
         $users=new Users();
         $response=$users->selectByEmail($data['email']);
         if(empty($response)) {
-            response(['message'=> 'This email doesn\'t exist! You need to register']);
+            response([
+                'message'=> 'This email doesn\'t exist! You need to register',
+                'success'=> false
+                ]);
         }
 
         // var_dump($response, array_keys($response), $response[0]);
@@ -41,7 +44,10 @@ class UserController {
 
         $password=$response[0]['password'];
         if(password_verify ($data['password'], $password) === false) {
-            response(['message'=> 'Password isn\'t correct!']);
+            response([
+                'message'=> 'Password isn\'t correct!',
+                'success'=> false
+                ]);
         }
 
         $user_id=$response[0]['id'];
@@ -49,13 +55,19 @@ class UserController {
         $tokens=new Tokens();
         $response=$tokens->insert($user_id, $token);
         if($response === true) {
-            response(['token'=> $token]);        
+            response([
+                'token'=> $token,
+                'success'=> true
+                ]);        
         }
     }
 
     function register(array $data) {
         if($data['password'] !== $data['confirm-password']) {
-            response(['message'=> 'Password isn\'t correct!']);
+            response([
+                'message'=> 'Password isn\'t correct!',
+                'success'=> false
+                ]);
         }
         
         $password=password_hash ( $data['password'] , PASSWORD_DEFAULT );
@@ -63,10 +75,16 @@ class UserController {
         $users=new Users();
         $response=$users->insert($data['fullname'], $data['email'], $password);
         if($response === true) {
-            response(['message'=> 'Successful registration!']);
+            response([
+                'message'=> 'Successful registration!',
+                'success'=> true
+                ]);
         }
         else{
-            response(['message'=> 'Duplicate email entry!']);
+            response([
+                'message'=> 'Duplicate email entry!',
+                'success'=> false
+                ]);
         }
         // true
         // 'Duplicate entry 'kate@mail.ru' for key 'email''
@@ -77,7 +95,10 @@ class UserController {
         $tokens=new Tokens();
         $response=$tokens->deletebyUserId($data['user_id']);
         if($response === true) {
-            response(['message'=> 'Succesfull!']); 
+            response([
+                'message'=> 'Succesfull!',
+                'success'=> true
+                ]); 
         }
     }
 
@@ -99,6 +120,16 @@ class UserController {
             ]);
         }
         return $response[0]['user_id'];
+    }
+
+    function getUserType ($data) {
+        $userId=self::isLoggedIn($data['token']);
+        $users=new Users();
+        $response=$users->select($userId);
+        response([
+            'type'=> $response[0]['type'],
+            'success' => true
+        ]);
     }
 
 }

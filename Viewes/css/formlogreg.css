@@ -19,7 +19,7 @@ h1 {
     text-align: center;
 }
 
-input[type=text], input[type=password] {
+input[type=text], input[type=email], input[type=password] {
     width: 100%;
     padding: 15px;
     margin: 5px 0 22px 0;
@@ -43,4 +43,9 @@ a {
 
 a:hover {
     color: var(--midnight);
+}
+
+.required {
+    color:red;
+    margin-top: -20px;
 }

@@ -40,13 +40,18 @@ function del(string $path, string $controller, string $function) {
 post("/login", "UserController", "login");
 post("/register", "UserController", "register");
 del("/logout", "UserController", "logout");
-get("/calendar", "TestController", "getCalendar");
+post("/user/type", "UserController", "getUserType");
+
 post("/post", "PostController", "create");
 get("/post", "PostController", "index");
 del("/post", "PostController", "delete");
-post("/calendar/training", "CalendarController", "createTraining");
+
 get("/calendar/training/list", "CalendarController", "listTrainings");
+post("/calendar/training", "CalendarController", "createTraining");
 del("/calendar/training", "CalendarController", "deleteTraining");
+post("/calendar/training/register", "CalendarController", "registerTraining");
+del("/calendar/training/register", "CalendarController", "deleteRegisterTraining");
+
 
 
 

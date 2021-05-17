@@ -82,5 +82,24 @@ class CalendarController {
             ]);  
         }
     }
-    //удалить регистрацию на урок   
+    //удалить регистрацию на урок
+    function deleteRegisterTraining($data) {
+        $userId=UserController::isLoggedIn($data['token']);
+        $users=new Users();
+        $response=$users->select($userId);
+        if($response[0]['type'] !== 'CLIENT') {
+            response([
+                'message'=> 'You are not a client!',
+                'success'=> false
+            ]);
+        }
+        $registrations=new Registrations();
+        $response=$registrations->delete($data['id']);
+        if($response === true) {
+            response([
+                'message'=> 'Succesefully deleted',
+                'success'=> true
+            ]);
+        }
+    }
 }

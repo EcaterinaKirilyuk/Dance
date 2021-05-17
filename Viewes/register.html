@@ -5,6 +5,7 @@
     <title>Register</title>
     <link rel="stylesheet" href="./css/style.css" />
     <link rel="stylesheet" href="./css/formlogreg.css" />
+    <script defer src="./js/registration.js"></script>
 </head>
 <body>
 <div class="content">
@@ -12,13 +13,13 @@
         <h1 class="horizontal-align">Register</h1>
         <br>
         <p class="horizontal-align">Please fill in this form to create an account:</p>
-        <form class="form-container" action="register.html" method="post">
+        <form class="form-container" action="register" method="post">
             
             <label class=""for="fullname">Full Name:</label>
             <input type="text" placeholder="Full Name" name="fullname" required>
             <br>
             <label for="email">Email:</label>
-            <input type="text" placeholder="Enter Email" name="email" required>
+            <input type="email" placeholder="Enter Email" name="email" required>
             <br>
             <label for="password">Password:</label>
             <input type="password" placeholder="Enter password" name="password" required>
