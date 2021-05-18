@@ -7,11 +7,38 @@
  */
 
 var form = document.querySelector(`form`);
-var formData = new FormData(form);
-var fullname = formData.get("fullname");
-var email = formData.get("email");
-var password = formData.get("password");
-var confirmPassword = formData.get("confirm-password");
+form.addEventListener('click', () => {
+    removeElement(".required");
+    removeElement(".error");
+});
+
+var buttonReg = document.getElementById("button-reg");
+buttonReg.addEventListener('click', event => {
+    event.preventDefault();
+
+    const formData = new FormData(form);
+    if(validateRegister(formData) === true) {
+        post(formData, "register", showOnConsole);
+    }
+});
+
+/**
+ * @this XMLHttpRequest
+ */
+function showOnConsole() {
+    var response = JSON.parse(this.response);
+    
+    if(response.success == true) {
+        window.location.href="http://dance.com/viewes/login.html";
+    } else {
+        var elementError = document.createElement("div");
+        elementError.innerText=response.message;
+        elementError.className="error";
+
+        var cardForm = document.querySelector(`.card-form`);
+        cardForm.parentElement.insertBefore(elementError, cardForm);
+    }
+}
 
 function required (value) {
     if( value === "") {
@@ -21,47 +48,48 @@ function required (value) {
     }
 }
 
+function addElement (name, message) {
+    var element = document.createElement("div");
+    element.innerText= message;
+    element.className = "required";
+    var input = document.querySelector(`input[name="${name}"]`);
+    input.parentElement.insertBefore(element, input.nextSibling);
+}
+
+function removeElement (className) {
+    var element = document.querySelector(className);
+    if(element != null) {
+        element.parentNode.removeChild(element);
+    }
+}
+
+function email(email) {
+    var re = /\S+@\S+\.\S+/;
+    return re.test(email);
+}
+
 function validateRegister (formData) {
 
-    if(formData.get("fullname") === "") {
-        // var element=document.createElement("div");
-        return "Write your fullname!"
+    if(!required(formData.get("fullname"))) {
+        return addElement("fullname", "Write fullname");
     }
 
-    if(formData.get("email") === "") {
-        return "Write your email!"  
+    if(!required(formData.get("email"))) {
+        return addElement("email", "Write email");
     }
 
-    if(formData.get("password") === "") {
-        return "Write your password!"
+    if(!email(formData.get("email"))) {
+        return addElement("email", "Incorrect email format"); 
     }
 
-    if(formData.get("confirm-password") === "") {
-        return "Confirm your fullname!"
+    if(!required(formData.get("password"))) {
+        return addElement("password", "Write password");
     }
 
-    return formData;
+    if(!required(formData.get("confirm-password"))) {
+        return addElement("confirm-password", "Confirm password");
+    }
 
-    // if( formData.get("fullname") === "" 
-    //     || formData.get("email") === "" 
-    //     || formData.get("password") === "" 
-    //     || formData.get("confirm-password") === ""
-    // ) {
-    //     return false;
-    // } else {
-    //     return true;
-    // }
+    return true;
 }
 
-function request (formData) {
-    var oReq = new XMLHttpRequest();
-    oReq.open("POST", "http://dance.com/router/register", true);
-    oReq.send(formData);
-}
-
-request(formData);
-console.log(required(fullname));
-console.log(required(email));
-console.log(required(password));
-console.log(required(confirmPassword));
-validateRegister(formData);

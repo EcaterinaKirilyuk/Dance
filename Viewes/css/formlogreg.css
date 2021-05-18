@@ -1,6 +1,6 @@
 .card-form {
     margin-top: 10%;
-    margin-left: 35%;
+    align-self: center;
     width: 500px;
     max-height: 100%;
     background-color: var(--white);
@@ -48,4 +48,12 @@ a:hover {
 .required {
     color:red;
     margin-top: -20px;
+}
+
+.error {
+    align-self: center;
+    position: absolute;
+    margin-top: 7%;
+    color: red;
+    font-size: 26px;
 }
