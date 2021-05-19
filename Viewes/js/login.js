@@ -1,10 +1,3 @@
-/**
- * querySelector()
- * div              --- tag
- * .class           --- class
- * #id              --- id
- * [type=text]      --- attribute
- */
 if(localStorage.token != null) {
     window.location.href="http://dance.com/viewes/layout.html";
 }
@@ -18,27 +11,25 @@ formInputs.forEach(function(input) {
     });
 })
 
-var buttonReg = document.getElementById("button-reg");
-buttonReg.addEventListener('click', event => {
+var buttonLog = document.getElementById("button-log");
+buttonLog.addEventListener('click', event => {
     event.preventDefault();
     
     removeElement(".required");
     removeElement(".error"); 
     
     const formData = new FormData(form);
-    if(validateRegister(formData) === true) {
-        post(formData, "register", onSuccessRegistration);
+    if(validateLogin(formData) === true) {
+        post(formData, "login", onSuccessLogin);
     }
 });
 
-/**
- * @this XMLHttpRequest
- */
-function onSuccessRegistration() {
+function onSuccessLogin() {
     var response = JSON.parse(this.response);
     
     if(response.success == true) {
-        window.location.href="http://dance.com/viewes/login.html";
+        localStorage.token = response.token;
+        window.location.href="http://dance.com/viewes/layout.html";
     } else {
         var elementError = document.createElement("div");
         elementError.innerText=response.message;
@@ -50,8 +41,6 @@ function onSuccessRegistration() {
 }
 
 function addElement (name, message) {
-    console.log(`${name} added`)
-
     var element = document.createElement("div");
     element.innerText= message;
     element.className = "required";
@@ -60,19 +49,13 @@ function addElement (name, message) {
 }
 
 function removeElement (className) {
-    console.log(`${className} removed`)
     var element = document.querySelector(className);
     if(element != null) {
         element.parentNode.removeChild(element);
     }
 }
 
-function validateRegister (formData) {
-
-    if(!required(formData.get("fullname"))) {
-        return addElement("fullname", "Write fullname");
-    }
-
+function validateLogin (formData) {
     if(!required(formData.get("email"))) {
         return addElement("email", "Write email");
     }
@@ -85,10 +68,5 @@ function validateRegister (formData) {
         return addElement("password", "Write password");
     }
 
-    if(!required(formData.get("confirm-password"))) {
-        return addElement("confirm-password", "Confirm password");
-    }
-
     return true;
 }
-

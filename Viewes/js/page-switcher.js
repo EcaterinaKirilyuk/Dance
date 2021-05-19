@@ -70,6 +70,7 @@ function loadCalendar() {
     loadJs("delete-modify");
 }
 
+loadHome();
 loadButton("home-page-button", loadHome);
 loadButton("bachata-page-button", loadBachata);
 loadButton("kizomba-page-button", loadKizomba);

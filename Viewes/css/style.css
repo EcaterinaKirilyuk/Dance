@@ -28,6 +28,10 @@
 
 }
 
+.buttons-layout {
+	display: none;
+}
+
 body {
 	display: flex;
 	flex-direction: column;
