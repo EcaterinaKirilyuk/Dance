@@ -40,18 +40,25 @@ function loadSalsa() {
     loadHtml("salsa");
     loadJs("modal");
     loadJs("file-input");
+    loadJs("request");
+    loadJs("lenta");
 }
 
 function loadKizomba() {
     loadHtml("kizomba");
     loadJs("modal");
     loadJs("file-input");
+    loadJs("request");
+    loadJs("lenta");
 }
 
 function loadBachata() {
     loadHtml("bachata");
     loadJs("modal");
     loadJs("file-input");
+    loadJs("request");
+    loadJs("lenta");
+    loadJs("post");
 }
 
 function loadHome() {

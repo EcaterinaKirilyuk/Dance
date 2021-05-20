@@ -5,6 +5,16 @@ class PostController
 {
     function create($data)
     {
+        $userId=UserController::isLoggedIn($data['token']);
+        $users=new Users();
+        $response=$users->select($userId);
+        if($response[0]['type'] !== 'TRAINER') {
+            response([
+                'message'=> 'You are not a trainer!',
+                'success'=> false
+            ]);
+        }
+
         $name_pieces = explode(".", $data['file']['name']);
         $fileTypeArray = explode("/", finfo_file(finfo_open(FILEINFO_MIME_TYPE), $data['file']['tmp_name']));
         
@@ -34,7 +44,7 @@ class PostController
 
     function index($data) {
         $posts=new Posts();
-        $response=$posts->selectList($data['rows'], $data['from']);
+        $response=$posts->selectList($data['rows'], $data['from'], $data['style']);
         if (is_array ( $response )) {
             response([
                 'list' => $response,
@@ -43,13 +53,13 @@ class PostController
         }
     }
 
-    function delete($data) {
-        $posts=new Posts();
-        $response=$posts->delete($data['id']);
-        if ( $response == true ) {
-            response([
-                'success' => true
-            ]);  
-        }
-    }
+    // function delete($data) {
+    //     $posts=new Posts();
+    //     $response=$posts->delete($data['id']);
+    //     if ( $response == true ) {
+    //         response([
+    //             'success' => true
+    //         ]);  
+    //     }
+    // }
 }

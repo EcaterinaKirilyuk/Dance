@@ -28,6 +28,10 @@
 
 }
 
+.nav-menu .active {
+	color: var(--black);
+}
+
 .buttons-layout {
 	display: none;
 }
@@ -128,6 +132,10 @@ li:hover {
 
 a:hover {
 	color: var(--black);
+}
+
+button.hidden {
+	display: none;
 }
 
 #footer {

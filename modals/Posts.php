@@ -15,8 +15,8 @@ class Posts {
         return DBController::execute($query);
     }
 
-    public function selectList( int $rows, int $from) {
-        $query="SELECT * FROM $this->table ORDER BY id DESC LIMIT $rows OFFSET $from";
+    public function selectList( int $rows, int $from, string $style) {
+        $query="SELECT * FROM $this->table  WHERE style='$style' ORDER BY id DESC LIMIT $rows OFFSET $from";
         return DBController::execute($query);
     }
 
