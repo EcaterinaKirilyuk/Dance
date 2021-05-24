@@ -59,6 +59,8 @@ function loadBachata() {
     loadJs("request");
     loadJs("lenta");
     loadJs("post");
+    loadJs("modal-dance-styles");
+    loadJs("validate");
 }
 
 function loadHome() {

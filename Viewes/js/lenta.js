@@ -1,9 +1,14 @@
-var lenta = document.querySelector(".lenta");
-var data = new Map();
-data.set("rows", 10);
-data.set("from", 0);
-data.set("style", lenta.dataset.style);
-get(data, "post", onSuccessUpdateList);
+
+function loadPosts(rows, from) {
+    var lenta = document.querySelector(".lenta");
+    var data = new Map();
+    data.set("rows", rows);
+    data.set("from", from);
+    data.set("style", lenta.dataset.style);
+    get(data, "post", onSuccessUpdateList);
+}
+
+loadPosts(10, 0);
 
 function onSuccessUpdateList() {
     var response = JSON.parse(this.response);
@@ -14,7 +19,8 @@ function onSuccessUpdateList() {
             } else {
                 var lentaBlock=createVideoBlock (row.datetime, row.link, row.comment);
             }
-
+            
+            var lenta = document.querySelector(".lenta");
             lenta.appendChild(lentaBlock);
         });
     }
@@ -80,4 +86,9 @@ function createVideoBlock (date, link, comment) {
     lentaBlock.appendChild(commentDiv);
 
     return lentaBlock;
+}
+
+function clearLenta () {
+    var lenta = document.querySelector(".lenta");
+    lenta.innerHTML = '';
 }

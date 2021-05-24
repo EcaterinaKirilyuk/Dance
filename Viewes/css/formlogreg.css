@@ -45,11 +45,6 @@ a:hover {
     color: var(--midnight);
 }
 
-.required {
-    color:red;
-    margin-top: -20px;
-}
-
 .error {
     align-self: center;
     position: absolute;

@@ -138,6 +138,11 @@ button.hidden {
 	display: none;
 }
 
+.required {
+    color:red;
+    margin-top: -20px;
+}
+
 #footer {
 	background-color: #225560;
 	height: 5vh;
