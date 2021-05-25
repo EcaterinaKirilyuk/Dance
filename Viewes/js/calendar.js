@@ -1,67 +1,51 @@
-let nowDate = new Date(),
-    nowDateNumber = nowDate.getDate(),
-    nowMonth = nowDate.getMonth(),
-    nowYear = nowDate.getFullYear(),
-    container = document.getElementById('look-calendar'),
-    monthContainer = container.getElementsByClassName('month-name')[0],
-    yearContainer = container.getElementsByClassName('year-name')[0],
-    daysContainer = container.getElementsByClassName('days')[0],
-    prev = container.getElementsByClassName('prev')[0],
-    next = container.getElementsByClassName('next')[0],
-    monthName = ['January','February','Marth','April','May','June','July','August','September','Octomber','November','December'];
+var date = new Date;
+var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", 
+"October", "November", "December"];
+var monthIndex = date.getMonth();
+var currentYear = date.getFullYear();
+var month = monthNames[monthIndex];
+var monthName = document.querySelector("h1");
+monthName.innerText = month + " " + currentYear;
+setDays(date);
 
-
-
-let curDate = nowDate.setMonth(nowDate.getMonth() - 1);
-console.log(nowDate.getFullYear());
-
-function setMonthCalendar(year,month) {
-    let monthDays = new Date(year, month + 1, 0).getDate(),
-        monthPrefix = new Date(year, month, 0).getDay(),
-        monthDaysText = '';
-
-    monthContainer.textContent = monthName[month];
-    yearContainer.textContent = year;
-    daysContainer.innerHTML = '';
-
-    if (monthPrefix > 0){
-        for (let i = 1  ; i <= monthPrefix; i++){
-            monthDaysText += '<td></td>';
+function setDays(date) {
+    var days = new Date(date);
+    days.setDate(1);
+    days.setDate(1-days.getDay());
+    var daysMonth = document.querySelectorAll(".day-number");
+    daysMonth.forEach(function(element) {
+        if(days.getMonth() !== date.getMonth()) {
+            element.style.color = "gray";
+        } else {
+            element.style.color = "";
         }
-    }
 
-    for (let i = 1; i <= monthDays; i++){
-        monthDaysText += '<td>' + i + '</td>';
-    }
+        element.innerText = days.getDate();
 
-    daysContainer.innerHTML = monthDaysText;
-
-    if (month == nowMonth && year == nowYear){
-        days = daysContainer.getElementsByTagName('td');
-        days[monthPrefix + nowDateNumber - 1].classList.add('date-now');
-    }
+        var dayOfMonth = days.getDate();
+        days.setDate(dayOfMonth + 1);  
+    })
 }
 
-setMonthCalendar(nowYear,nowMonth);
+var buttonPrev = document.querySelector(".prev");
+buttonPrev.addEventListener('click', () => {
+    monthIndex = date.getMonth() - 1;
+    date.setMonth(monthIndex);
+    month = monthNames[date.getMonth()];
 
-prev.onclick = function () {
-    let curDate = new Date(yearContainer.textContent,monthName.indexOf(monthContainer.textContent));
+    var monthName = document.querySelector("h1");
+    monthName.innerText = month + " " + date.getFullYear();
+    setDays(date);
+});
 
-    curDate.setMonth(curDate.getMonth() - 1);
+var buttonNext = document.querySelector(".next");
+buttonNext.addEventListener('click', () => {
+    monthIndex = date.getMonth() + 1;
+    date.setMonth(monthIndex);
+    month = monthNames[date.getMonth()];
+    
+    var monthName = document.querySelector("h1");
+    monthName.innerText = month + " " + date.getFullYear();
+    setDays(date);
+});
 
-    let curYear = curDate.getFullYear(),
-        curMonth = curDate.getMonth();
-
-    setMonthCalendar(curYear,curMonth);
-}
-
-next.onclick = function () {
-    let curDate = new Date(yearContainer.textContent,monthName.indexOf(monthContainer.textContent));
-
-    curDate.setMonth(curDate.getMonth() + 1);
-
-    let curYear = curDate.getFullYear(),
-        curMonth = curDate.getMonth();
-
-    setMonthCalendar(curYear,curMonth);
-}

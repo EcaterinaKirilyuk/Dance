@@ -1,3 +1,5 @@
+var loadingLentaData = false;
+
 var formModal = document.querySelector(`form`);
 var formInputText = document.querySelectorAll("form input, form textarea");
 formInputText.forEach(function(element) {
@@ -7,17 +9,29 @@ formInputText.forEach(function(element) {
 })
 
 var modalButton = document.getElementById("save");
+
 modalButton.addEventListener('click', event => {
     event.preventDefault();
     
-    removeElement(".required");    
+    removeElement(".required");
+
     const modalData = new FormData(formModal);
     modalData.set("token", localStorage.token); 
+
     if(validateModal(modalData) === true) {
         post(modalData, "post", onSuccessPostAdd);
     }
 });
 
+document.addEventListener('scroll', () => {
+    var lenta = document.querySelector('.lenta');
+    var from = lenta.children.length;
+
+    if(getElementPosition(4) < 0 && !loadingLentaData && from % 10 == 0) {
+        loadingLentaData = true;
+        loadPosts(10, from);
+    }
+});
 
 function onSuccessPostAdd() {
     var response = JSON.parse(this.response);
@@ -32,8 +46,10 @@ function onSuccessPostAdd() {
 
 function getElementPosition (number) {
     var elements = document.querySelector('.lenta');
-    var index=elements.length-number-1;
-    elements.children[index];
+    var index=elements.children.length-number-1;
+    var indexElem=elements.children[index];
+    var positionElem=indexElem.getBoundingClientRect();
+    return positionElem.top;
 }
 
 function addElementModalInput (name, message) {

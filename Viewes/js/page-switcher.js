@@ -77,6 +77,7 @@ function loadCalendar() {
     loadHtml("calendar");
     loadJs("modify-calendar");
     loadJs("delete-modify");
+    loadJs("calendar");
 }
 
 loadHome();

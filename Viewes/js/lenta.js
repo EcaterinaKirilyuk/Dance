@@ -24,6 +24,8 @@ function onSuccessUpdateList() {
             lenta.appendChild(lentaBlock);
         });
     }
+
+    loadingLentaData = false;
 }
 
 function createImageBlock (date, link, comment) {
