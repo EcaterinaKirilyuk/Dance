@@ -47,27 +47,21 @@ function onSuccessPostAdd() {
 function getElementPosition (number) {
     var elements = document.querySelector('.lenta');
     var index=elements.children.length-number-1;
+    if(index < 0) {
+        return 0;
+    }
     var indexElem=elements.children[index];
     var positionElem=indexElem.getBoundingClientRect();
     return positionElem.top;
 }
 
-function addElementModalInput (name, message) {
+function addElementAfterElement (query, message) {
     var element = document.createElement("div");
     element.innerText= message;
     element.className = "required";
 
-    var input = document.querySelector(`input[name="${name}"]`);
+    var input = document.querySelector(query);
     input.parentElement.insertBefore(element, input.nextSibling);
-}
-
-function addElementModalText (name, message) {
-    var element = document.createElement("div");
-    element.innerText= message;
-    element.className = "required";
-
-    var text = document.querySelector(`textarea[name="${name}"]`);
-    text.parentElement.insertBefore(element, text.nextSibling);
 }
 
 function removeElement (className) {
@@ -79,15 +73,15 @@ function removeElement (className) {
 
 function validateModal (modalData) {
     if(!required(modalData.get("file"))) {
-        return addElementModalInput("file", "Upload your file");
+        return addElementAfterElement(`#file-name`, "Upload your file");
     }
 
     if(!required(modalData.get("comment"))) {
-        return addElementModalText("comment", "Write comment");
+        return addElementAfterElement(`textarea[name="comment"]`, "Write comment");
     }
     
     if(!lengthStringVerify(modalData.get("comment"), 250)) {
-        return addElementModalText("comment", "Invalid length. The maximum length is 250 characters."); 
+        return addElementAfterElement(`textarea[name="comment"]`, "Invalid length. The maximum length is 250 characters."); 
     }
 
     return true;

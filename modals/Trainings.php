@@ -16,7 +16,10 @@ class Trainings {
     }
 
     public function selectByDatetime(int $month, int $year) {
-        $query="SELECT * FROM  $this->table WHERE MONTH(datetime)=$month AND YEAR(datetime)=$year";
+        $query="SELECT $this->table.*, count(registrations.training_id) clients FROM $this->table 
+        LEFT JOIN registrations ON $this->table.id = registrations.training_id
+        WHERE MONTH(datetime)=$month AND YEAR(datetime)=$year
+        GROUP BY $this->table.id";
         return DBController::execute($query);
     }
 

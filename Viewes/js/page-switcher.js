@@ -42,6 +42,9 @@ function loadSalsa() {
     loadJs("file-input");
     loadJs("request");
     loadJs("lenta");
+    loadJs("check-user-type");
+    loadJs("modal-dance-styles");
+    loadJs("validate");
 }
 
 function loadKizomba() {
@@ -50,6 +53,9 @@ function loadKizomba() {
     loadJs("file-input");
     loadJs("request");
     loadJs("lenta");
+    loadJs("check-user-type");
+    loadJs("modal-dance-styles");
+    loadJs("validate");
 }
 
 function loadBachata() {
@@ -58,7 +64,7 @@ function loadBachata() {
     loadJs("file-input");
     loadJs("request");
     loadJs("lenta");
-    loadJs("post");
+    loadJs("check-user-type");
     loadJs("modal-dance-styles");
     loadJs("validate");
 }
@@ -77,7 +83,11 @@ function loadCalendar() {
     loadHtml("calendar");
     loadJs("modify-calendar");
     loadJs("delete-modify");
+    loadJs("request");
     loadJs("calendar");
+    loadJs("check-user-type");
+    loadJs("modal-add-calendar");
+    loadJs("validate");
 }
 
 loadHome();

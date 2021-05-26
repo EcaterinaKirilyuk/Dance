@@ -17,7 +17,7 @@
                 <h1></h1> 
             </div>
              <div class="add-button">
-                 <button id="modify-calendar" class="add">Add</button>
+                 <button id="modify-calendar" class="add hidden">Add</button>
              </div>
         </div>
         <table class="calendar">
@@ -131,9 +131,11 @@
                     <td class="">
                         <div class="day-number">12</div>
                         <div class="list">
-                            <div class="event">19:30 Kizomba</div>
-                            <div class="event">19:30 Kizomba</div>
-                            <div class="event">19:30 Kizomba</div>
+                            <div class="event">
+                                <div>19:30</div>
+                                <div>Kizomba</div>
+                                <div>5</div>
+                            </div>
                         </div>
                     </td>
                     <td class="">
@@ -313,13 +315,13 @@
         <div class="modal-body">
             <form action="" method="post">
                 <label class="" for="date">Date</label>
-                <input type="date" placeholder="Date" name="date">
+                <input type="date" placeholder="Date" name="date" required>
 
                 <label class="" for="time">Time</label>
-                <input type="time" placeholder="Time" name="time">
+                <input type="time" placeholder="Time" name="time" required>
 
                 <label class="" for="time">Style</label>
-                <input type="text" placeholder="Style" name="style">
+                <input type="text" placeholder="Style" name="style" required>
                 <button type="submit" class="save" id="save">
                     <a>Save</a>
                 </button>
@@ -338,13 +340,13 @@
         <div class="modal-body">
             <form action="" method="post">
                 <label class="" for="date">Date</label>
-                <input type="date" placeholder="Date" name="date">
+                <input type="date" placeholder="Date" name="date" required>
 
                 <label class="" for="time">Time</label>
-                <input type="time" placeholder="Time" name="time">
+                <input type="time" placeholder="Time" name="time" required>
 
                 <label class="" for="time">Style</label>
-                <input type="text" placeholder="Style" name="style">
+                <input type="text" placeholder="Style" name="style" required>
                 <button type="submit" class="save" id="save">
                     <a>Save</a>
                 </button>

@@ -50,10 +50,15 @@ td > .day-number {
 }
 
 .event {
+    display: flex;
     padding-left: 2px;
     width: 100%;
     text-align: left;
     height: 20px;
+}
+
+.event > div {
+    padding-right: 5px;
 }
 
 .event:hover {

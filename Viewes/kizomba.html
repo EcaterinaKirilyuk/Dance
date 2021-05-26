@@ -19,43 +19,9 @@
         </p>
     </div>
 </div>
+<button class="addnew hidden" id="addnew">Add photo/video</button>
 <div class="lenta" data-style="kizomba">
-    <button class="addnew" id="addnew">Add photo/video</button>
-    <div class="lenta-block">
-        <div class="date">
-            <p>3.10.2017</p>
-        </div>
-        <div class="photo">
-            <img src="../storage/kizomba/image/kizomba.jpg">
-        </div>
-        <div class="comment">
-            <p>Photo</p>
-        </div>
-    </div>
-    <div class="lenta-block">
-        <div class="date">
-            <p>3.10.2017</p>
-        </div>
-        <div class="photo">
-            <img src="../storage/kizomba/image/kizomba1.jpg">
-        </div>
-        <div class="comment">
-            <p>Photo</p>
-        </div>
-    </div>
-    <div class="lenta-block">
-        <div class="date">
-            <p>3.10.2017</p>
-        </div>
-        <div class="video">
-            <video controls>
-                <source src="../storage/kizomba/video/isabellefelicienkizomba.webm">
-            </video>
-        </div>
-        <div class="comment">
-            <p>Video</p>
-        </div>
-    </div>
+
 </div>
 <div id="myModal" class="modal">
     <!-- Modal content -->
@@ -68,9 +34,9 @@
             <form action="" method="post">
                 <label id="yourBtn">Upload</label>
                 <input id="file-name" type="text" placeholder="Choose file" readonly>
-                <div style='height: 0px;width: 0px; overflow:hidden;'><input id="upfile" type="file" value="upload"  accept="video/*,image/*" required/></div>
+                <div style='height: 0px;width: 0px; overflow:hidden;'><input id="upfile" name="file" type="file" value="upload"  accept="video/*,image/*" required/></div>
                 <label for="comment">Comment</label>
-                <textarea placeholder="Write comment" readonly name="comment"></textarea>
+                <textarea placeholder="Write comment" name="comment"></textarea>
                 <input name="style" type="text" value="kizomba" hidden readonly>
                 <button type="submit" class="save" id="save">
                     <a>Save</a>

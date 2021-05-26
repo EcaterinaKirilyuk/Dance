@@ -50,8 +50,6 @@ function onSuccessRegistration() {
 }
 
 function addElement (name, message) {
-    console.log(`${name} added`)
-
     var element = document.createElement("div");
     element.innerText= message;
     element.className = "required";
@@ -60,7 +58,6 @@ function addElement (name, message) {
 }
 
 function removeElement (className) {
-    console.log(`${className} removed`)
     var element = document.querySelector(className);
     if(element != null) {
         element.parentNode.removeChild(element);
