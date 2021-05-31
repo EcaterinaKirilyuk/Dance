@@ -19,7 +19,7 @@ class Trainings {
         $query="SELECT $this->table.*, count(registrations.training_id) clients FROM $this->table 
         LEFT JOIN registrations ON $this->table.id = registrations.training_id
         WHERE MONTH(datetime)=$month AND YEAR(datetime)=$year
-        GROUP BY $this->table.id";
+        GROUP BY $this->table.id ORDER BY datetime";
         return DBController::execute($query);
     }
 

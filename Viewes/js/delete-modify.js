@@ -1,15 +1,6 @@
 // Get the modal
 var deleteModal = document.getElementById("DeleteModal");
 
-// Get the button that opens the modal
-var buttons = document.getElementsByClassName("event");
-for(const button of buttons)
-{
-    button.onclick = function() {
-        deleteModal.style.display = "block";
-    }
-}
-
 //Get the <span> element that closes the modal
 var deleteSpan = document.getElementById("delete-close");
 

@@ -17,7 +17,35 @@ get(calendarData, "calendar/training/list", onSuccessUpdateCalendar);
 function onSuccessUpdateCalendar() {
     var response = JSON.parse(this.response);
     if (response.success == true) {
-       console.log(response);
+        console.log(response);
+        var blockNumbers = document.querySelectorAll("div.day-number");
+        blockNumbers.forEach(function(element) {
+
+            if(response.list.length === 0) {
+                return;
+            }
+        
+            do {
+                var row = response.list[0];
+
+                if (element.dataset.fulldate === row.datetime.substr(0, 10)) {
+                    var event = createEvent (row.datetime.substr(11, 5), row.style.toLowerCase(), row.clients);
+                    event.addEventListener("click", function (e) {
+                        var timeInput = document.querySelector('#DeleteModal input[name="time"]');
+                        timeInput.value = e.currentTarget.children[0].innerText;
+                        var styleInput = document.querySelector('#DeleteModal input[name="style"]');
+                        styleInput.value = e.currentTarget.children[1].innerText;
+                        var dateInput = document.querySelector('#DeleteModal input[name="date"]');
+                        var fullDate = e.currentTarget.parentElement.previousElementSibling.dataset.fulldate;
+                        dateInput.value = fullDate;
+                        deleteModal.style.display = "block";
+                    });
+                    element.nextElementSibling.appendChild(event);
+                    response.list.shift(0);
+                }
+
+            } while(response.list.length > 0 && element.dataset.fulldate === row.datetime.substr(0, 10));
+        })
     }
 }
 
@@ -33,11 +61,20 @@ function setDays(date) {
             element.style.color = "";
         }
 
-        element.dataset.month = days.getMonth();
-        element.dataset.date = days.getDate();
-        element.dataset.year = days.getFullYear();
-        element.dataset.fulldate = days.getFullYear() + "-" + days.getMonth() + "-" + days.getDate();
+        if(days.getMonth() + 1 < 10) {
+            element.dataset.month = "0" + (days.getMonth() + 1);
+        } else {
+            element.dataset.month = days.getMonth() + 1;
+        }
 
+        if(days.getDate() + 1 < 10) {
+            element.dataset.date = "0" + days.getDate();
+        } else {
+            element.dataset.date = days.getDate();
+        }
+
+        element.dataset.year = days.getFullYear();
+        element.dataset.fulldate = days.getFullYear() + "-" + element.dataset.month + "-" + element.dataset.date;
         element.innerText = days.getDate();
 
         var dayOfMonth = days.getDate();

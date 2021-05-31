@@ -55,6 +55,7 @@ td > .day-number {
     width: 100%;
     text-align: left;
     height: 20px;
+    text-transform: capitalize;
 }
 
 .event > div {
