@@ -1,8 +1,8 @@
 var date = new Date;
+date.setDate(15);
 var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", 
 "October", "November", "December"];
-var monthIndex = date.getMonth();
-var month = monthNames[monthIndex];
+var month = monthNames[date.getMonth()];
 var monthName = document.querySelector("h1");
 monthName.innerText = month + " " + date.getFullYear();
 setDays(date);
@@ -17,36 +17,52 @@ get(calendarData, "calendar/training/list", onSuccessUpdateCalendar);
 function onSuccessUpdateCalendar() {
     var response = JSON.parse(this.response);
     if (response.success == true) {
-        console.log(response);
         var blockNumbers = document.querySelectorAll("div.day-number");
         blockNumbers.forEach(function(element) {
-
-            if(response.list.length === 0) {
-                return;
-            }
-        
-            do {
-                var row = response.list[0];
-
-                if (element.dataset.fulldate === row.datetime.substr(0, 10)) {
-                    var event = createEvent (row.datetime.substr(11, 5), row.style.toLowerCase(), row.clients);
-                    event.addEventListener("click", function (e) {
-                        var timeInput = document.querySelector('#DeleteModal input[name="time"]');
-                        timeInput.value = e.currentTarget.children[0].innerText;
-                        var styleInput = document.querySelector('#DeleteModal input[name="style"]');
-                        styleInput.value = e.currentTarget.children[1].innerText;
-                        var dateInput = document.querySelector('#DeleteModal input[name="date"]');
-                        var fullDate = e.currentTarget.parentElement.previousElementSibling.dataset.fulldate;
-                        dateInput.value = fullDate;
-                        deleteModal.style.display = "block";
-                    });
-                    element.nextElementSibling.appendChild(event);
-                    response.list.shift(0);
-                }
-
-            } while(response.list.length > 0 && element.dataset.fulldate === row.datetime.substr(0, 10));
-        })
+            appendDataToBlocks(element, response.list);
+        });
     }
+}
+
+/**
+ * 
+ * @param {Element} element 
+ * @param {Array} list
+ * @returns 
+ */
+function appendDataToBlocks(element, list) {
+    if(list.length === 0) {
+        return;
+    }
+
+    do {
+        var row = list[0];
+
+        if (element.dataset.fulldate === row.datetime.substr(0, 10)) {
+            var event = createEvent (row.datetime.substr(11, 5), row.style.toLowerCase(), row.clients);
+            event.addEventListener("click", function (e) {
+                appendDataToDeleteModal(e.currentTarget);
+                deleteModal.style.display = "block";
+            });
+            element.nextElementSibling.appendChild(event);
+            list.shift(0);
+        }
+
+    } while(list.length > 0 && element.dataset.fulldate === row.datetime.substr(0, 10));
+}
+
+/**
+ * 
+ * @param {Element} eventTarget 
+ */
+function appendDataToDeleteModal(eventTarget) {
+    var timeInput = document.querySelector('#DeleteModal input[name="time"]');
+    timeInput.value = eventTarget.children[0].innerText;
+    var styleInput = document.querySelector('#DeleteModal input[name="style"]');
+    styleInput.value = eventTarget.children[1].innerText;
+    var dateInput = document.querySelector('#DeleteModal input[name="date"]');
+    var fullDate = eventTarget.parentElement.previousElementSibling.dataset.fulldate;
+    dateInput.value = fullDate;
 }
 
 function setDays(date) {
@@ -79,7 +95,7 @@ function setDays(date) {
 
         var dayOfMonth = days.getDate();
         days.setDate(dayOfMonth + 1);  
-    })
+    });
 }
 
 function createEvent (time, style, count) {
@@ -101,32 +117,24 @@ function createEvent (time, style, count) {
     return eventBlock;
 }
 
-function appentEventToList () {
-    // createEvent (time, style, count);
-    var list = document.querySelectorAll("div.list");
-    list.appendChild(eventBlock);
-}
-
 var buttonPrev = document.querySelector(".prev");
 buttonPrev.addEventListener('click', () => {
-    monthIndex = date.getMonth() - 1;
-    date.setMonth(monthIndex);
-    month = monthNames[date.getMonth()];
-
-    var monthName = document.querySelector("h1");
-    monthName.innerText = month + " " + date.getFullYear();
-    setDays(date);
+    changeMonth(date.getMonth() - 1);
 });
 
 var buttonNext = document.querySelector(".next");
 buttonNext.addEventListener('click', () => {
-    monthIndex = date.getMonth() + 1;
+    changeMonth(date.getMonth() + 1);
+});
+
+function changeMonth(monthIndex) {
+    date.setDate(15);
     date.setMonth(monthIndex);
     month = monthNames[date.getMonth()];
     
     var monthName = document.querySelector("h1");
     monthName.innerText = month + " " + date.getFullYear();
     setDays(date);
-});
+}
 
 
