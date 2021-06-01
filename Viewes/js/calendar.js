@@ -6,31 +6,108 @@ var month = monthNames[date.getMonth()];
 var monthName = document.querySelector("h1");
 monthName.innerText = month + " " + date.getFullYear();
 setDays(date);
+manageTrainings();
 
-var calendarData = new Map();
-calendarData.set("token", localStorage.token);
-calendarData.set("month", date.getMonth() +1); 
-calendarData.set("year", date.getFullYear());
 
-get(calendarData, "calendar/training/list", onSuccessUpdateCalendar);
+function manageTrainings() {
+    var elemEvents = document.querySelectorAll("div.event");
+    elemEvents.forEach(function(elem){
+        elem.remove();
+    })
+
+    var calendarData = new Map();
+    calendarData.set("token", localStorage.token);
+    calendarData.set("month", date.getMonth() +1); 
+    calendarData.set("year", date.getFullYear());
+    
+    get(calendarData, "calendar/training/list", onSuccessUpdateCalendar);
+}
 
 function onSuccessUpdateCalendar() {
     var response = JSON.parse(this.response);
     if (response.success == true) {
-        var blockNumbers = document.querySelectorAll("div.day-number");
-        blockNumbers.forEach(function(element) {
-            appendDataToBlocks(element, response.list);
+        var tokenData = new FormData();
+        tokenData.set("token", localStorage.token); 
+        post(tokenData, "user/type", function() {
+            var responseUserType = JSON.parse(this.response);
+            if(responseUserType.success == true) {
+                var blockNumbers = document.querySelectorAll("div.day-number");
+
+                if(responseUserType.type == "TRAINER")
+                {
+                    blockNumbers.forEach(function(element) {
+                        appendDataToBlocks(element, response.list, function (e) {
+                            appendDataToDeleteModal(e.currentTarget);
+                            deleteModal.style.display = "block";
+                        });
+                    });
+                } else {
+                    blockNumbers.forEach(function(element) {
+                        appendDataToBlocks(element, response.list, function (e) {
+                            var eventBlock = e.currentTarget;
+
+
+                            
+
+                            if(eventBlock.dataset.registered == 1) {
+                                var trainingData = new Map();
+                                trainingData.set("token", localStorage.token);
+                                var trainingId = eventBlock.dataset.id;
+                                trainingData.set("training_id", trainingId);
+
+                                del(trainingData, "calendar/training/register", function(event) {
+                                    unsubcribe(event.currentTarget, eventBlock);
+                                });
+
+                            } else {
+                                var trainingData = new FormData();
+                                trainingData.set("token", localStorage.token);
+                                var trainingId = eventBlock.dataset.id;
+                                trainingData.set("training_id", trainingId);
+
+                                post(trainingData, "calendar/training/register", function(event) {
+                                    subcribe(event.currentTarget, eventBlock);
+                                });
+                            }
+
+                        });
+                    });
+                }
+            }
         });
+        
     }
 }
+
+function unsubcribe(xmlHttpRequest, element) {
+    var responseUnsubcribe = JSON.parse(xmlHttpRequest.response);
+    if(responseUnsubcribe.success == true) {
+        element.style.backgroundColor=null;
+        element.dataset.registered=0;
+        element.children[2].innerText = Number(element.children[2].innerText)-1;
+
+    }
+}
+
+function subcribe(xmlHttpRequest, element) {
+    var responseUnsubcribe = JSON.parse(xmlHttpRequest.response);
+    if(responseUnsubcribe.success == true) {
+        element.style.backgroundColor="var(--kepel)";
+        element.dataset.registered=1;
+        element.children[2].innerText = Number(element.children[2].innerText)+1;
+    }
+}
+
+
 
 /**
  * 
  * @param {Element} element 
  * @param {Array} list
+ * @param {Function} eventClickHandler
  * @returns 
  */
-function appendDataToBlocks(element, list) {
+function appendDataToBlocks(element, list, eventClickHandler) {
     if(list.length === 0) {
         return;
     }
@@ -39,11 +116,8 @@ function appendDataToBlocks(element, list) {
         var row = list[0];
 
         if (element.dataset.fulldate === row.datetime.substr(0, 10)) {
-            var event = createEvent (row.datetime.substr(11, 5), row.style.toLowerCase(), row.clients);
-            event.addEventListener("click", function (e) {
-                appendDataToDeleteModal(e.currentTarget);
-                deleteModal.style.display = "block";
-            });
+            var event = createEvent (row.datetime.substr(11, 5), row.style.toLowerCase(), row.clients, row.id, row.registered);
+            event.addEventListener("click", eventClickHandler);
             element.nextElementSibling.appendChild(event);
             list.shift(0);
         }
@@ -56,6 +130,8 @@ function appendDataToBlocks(element, list) {
  * @param {Element} eventTarget 
  */
 function appendDataToDeleteModal(eventTarget) {
+    var idInput = document.querySelector('#DeleteModal input[name="id"]');
+    idInput.value = eventTarget.dataset.id;
     var timeInput = document.querySelector('#DeleteModal input[name="time"]');
     timeInput.value = eventTarget.children[0].innerText;
     var styleInput = document.querySelector('#DeleteModal input[name="style"]');
@@ -83,7 +159,7 @@ function setDays(date) {
             element.dataset.month = days.getMonth() + 1;
         }
 
-        if(days.getDate() + 1 < 10) {
+        if(days.getDate() < 10) {
             element.dataset.date = "0" + days.getDate();
         } else {
             element.dataset.date = days.getDate();
@@ -98,9 +174,14 @@ function setDays(date) {
     });
 }
 
-function createEvent (time, style, count) {
+function createEvent (time, style, count, id, registered) {
     var eventBlock = document.createElement("div");
     eventBlock.className="event";
+    eventBlock.dataset.id = id;
+    eventBlock.dataset.registered = registered;
+    if (registered == true) {
+        eventBlock.style.backgroundColor="var(--kepel)";
+    }
 
     var timeBlock = document.createElement("div");
     var styleBlock = document.createElement("div");
@@ -135,6 +216,8 @@ function changeMonth(monthIndex) {
     var monthName = document.querySelector("h1");
     monthName.innerText = month + " " + date.getFullYear();
     setDays(date);
+    manageTrainings();
+
 }
 
 

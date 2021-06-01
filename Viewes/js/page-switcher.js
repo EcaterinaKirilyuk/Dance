@@ -87,6 +87,7 @@ function loadCalendar() {
     loadJs("calendar");
     loadJs("check-user-type");
     loadJs("modal-add-calendar");
+    loadJs("modal-delete-calendar");
     loadJs("validate");
 }
 

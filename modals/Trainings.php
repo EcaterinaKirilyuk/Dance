@@ -15,8 +15,8 @@ class Trainings {
         return DBController::execute($query);
     }
 
-    public function selectByDatetime(int $month, int $year) {
-        $query="SELECT $this->table.*, count(registrations.training_id) clients FROM $this->table 
+    public function selectByDatetime(int $month, int $year, int $userId) {
+        $query="SELECT $this->table.*, count(registrations.training_id) clients, SUM(IF(registrations.user_id = $userId,1,0)) registered  FROM $this->table 
         LEFT JOIN registrations ON $this->table.id = registrations.training_id
         WHERE MONTH(datetime)=$month AND YEAR(datetime)=$year
         GROUP BY $this->table.id ORDER BY datetime";

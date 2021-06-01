@@ -5,8 +5,8 @@ require_once(__DIR__ . '/../controllers/DBController.php');
 class Registrations {
     private $table="registrations";
 
-    public function insert(int $training_id, int $user_id) {
-        $query="INSERT INTO $this->table VALUES(NULL, '$training_id', '$user_id')";
+    public function insert(int $trainingId, int $userId) {
+        $query="INSERT INTO $this->table VALUES(NULL, '$trainingId', '$userId')";
         return DBController::execute($query);
     }
 
@@ -15,8 +15,8 @@ class Registrations {
         return DBController::execute($query);
     }
 
-    public function delete(int $id) {
-        $query = "DELETE FROM $this->table WHERE id=$id";
+    public function delete(int $trainingId, int $userId) {
+        $query = "DELETE FROM $this->table WHERE training_id=$trainingId AND user_id=$userId";
         return DBController::execute($query);
     }
 }

@@ -6,9 +6,9 @@ modalElements.forEach(function(element) {
     });
 })
 
-var modalButton = document.getElementById("save");
+var modalButtonAdd = addForm.querySelector('button[type="submit"]');
 
-modalButton.addEventListener('click', event => {
+modalButtonAdd.addEventListener('click', event => {
     event.preventDefault();
     
     removeElement(".required");
@@ -26,10 +26,11 @@ modalButton.addEventListener('click', event => {
 
 function onSuccessCreateTraining() {
     var response = JSON.parse(this.response);
-    
     if(response.success == true) {
+        manageTrainings();
         var modal = document.querySelector("#myModal");
         modal.style.display = "none";
+        modal.querySelector("form").reset();
     }
 }
 

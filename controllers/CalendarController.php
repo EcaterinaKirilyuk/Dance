@@ -74,7 +74,7 @@ class CalendarController {
         $users=new Users();
         $response=$users->select($userId);
         $trainings=new Trainings();
-        $response=$trainings->selectByDatetime( $data['month'], $data['year']);
+        $response=$trainings->selectByDatetime( $data['month'], $data['year'], $userId);
         if (is_array ( $response )) {
             response([
                 'list' => $response,
@@ -94,7 +94,7 @@ class CalendarController {
             ]);
         }
         $registrations=new Registrations();
-        $response=$registrations->delete($data['id']);
+        $response=$registrations->delete($data['training_id'], $userId);
         if($response === true) {
             response([
                 'message'=> 'Succesefully deleted',

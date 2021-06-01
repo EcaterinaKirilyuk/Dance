@@ -8,7 +8,7 @@ formInputText.forEach(function(element) {
     });
 })
 
-var modalButton = document.getElementById("save");
+var modalButton = formModal.querySelector('button[type="submit"]');
 
 modalButton.addEventListener('click', event => {
     event.preventDefault();
@@ -25,6 +25,11 @@ modalButton.addEventListener('click', event => {
 
 document.addEventListener('scroll', () => {
     var lenta = document.querySelector('.lenta');
+    
+    if(lenta === null) {
+        return;
+    }
+
     var from = lenta.children.length;
 
     if(getElementPosition(4) < 0 && !loadingLentaData && from % 10 == 0) {
